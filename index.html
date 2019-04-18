@@ -1,0 +1,88 @@
+<html>
+
+<head>
+  <style type="text/css">
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #content {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      padding-bottom: 20px;
+    }
+    #navigator {
+      position: fixed;
+      height: 20px;
+      z-index: 1;
+      bottom: 0;
+    }
+    #btn-prev, #btn-next {
+      background: lightgreen;
+    }
+    .active {
+      background: lightcoral;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navigator">
+    <button id="btn-prev" onclick="prev()">previous</button>
+    <button onclick="set(1)">East Asia & Oceania</button>
+    <button onclick="set(2)">Northen Europe</button>
+    <button onclick="set(3)">Middle East & South Asia</button>
+    <button onclick="set(4)">Eastern Europe</button>
+    <button onclick="set(5)">Western Europe</button>
+    <button onclick="set(6)">Southeast Asia</button>
+    <button onclick="set(7)">Africa</button>
+    <button onclick="set(8)">North & South America</button>
+    <button id="btn-next" onclick="next()">next</button>
+    
+  </div>
+  <div id="content">
+    <iframe id="iframe" width="100%" height="100%" frameborder="0"></iframe>
+  </div>
+  <script>
+    let currentId = Math.floor(Math.random() * 7) + 1
+    const urls = [
+      "https://xrosisorx.github.io/Stat_2019_East_Asia_and_Oceania/", //1
+      "https://eveem.github.io/statweb/", //2
+      "https://chanchai134.github.io/chanchai134.github.io/", //3
+      "https://fifigith.github.io/stat-group-4/", //4
+      "https://statgroup5.github.io/Visualization/", //5
+      "https://operapay.github.io/operapay.github.io/", //6
+      "https://monthol8th.github.io/01204314-assignment2/", //7
+      "https://buachonnikan.github.io/buachonnikan.github.io/", //8
+    ]
+    function set(id) {
+      console.log(id)
+      document.getElementsByTagName("button")[currentId].className = ""
+      let btnPrev = document.getElementById("btn-prev")
+      let btnNext = document.getElementById("btn-next")
+      btnPrev.disabled = (id === 1)
+      btnNext.disabled = (id === 8)
+      document.getElementById("iframe").setAttribute("src", urls[id - 1])
+      currentId = id
+      document.getElementsByTagName("button")[currentId].className = "active"
+    }
+    function next() {
+      if (currentId === 8) return
+      set(currentId + 1)
+    }
+    function prev() {
+      if (currentId === 1) return
+      set(currentId - 1)
+    }
+    set(currentId)
+  </script>
+</body>
+
+</html>
