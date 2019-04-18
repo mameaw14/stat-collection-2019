@@ -18,15 +18,19 @@
       top: 0;
       padding-bottom: 20px;
     }
+
     #navigator {
       position: fixed;
       height: 20px;
       z-index: 1;
       bottom: 0;
     }
-    #btn-prev, #btn-next {
+
+    #btn-prev,
+    #btn-next {
       background: lightgreen;
     }
+
     .active {
       background: lightcoral;
     }
@@ -45,7 +49,7 @@
     <button onclick="set(7)">Africa</button>
     <button onclick="set(8)">North & South America</button>
     <button id="btn-next" onclick="next()">next</button>
-    
+
   </div>
   <div id="content">
     <iframe id="iframe" width="100%" height="100%" frameborder="0"></iframe>
@@ -53,17 +57,16 @@
   <script>
     let currentId = Math.floor(Math.random() * 7) + 1
     const urls = [
-      "https://xrosisorx.github.io/Stat_2019_East_Asia_and_Oceania/", //1
-      "https://eveem.github.io/statweb/", //2
-      "https://chanchai134.github.io/chanchai134.github.io/", //3
-      "https://fifigith.github.io/stat-group-4/", //4
-      "https://statgroup5.github.io/Visualization/", //5
-      "https://operapay.github.io/operapay.github.io/", //6
-      "https://monthol8th.github.io/01204314-assignment2/", //7
-      "https://buachonnikan.github.io/buachonnikan.github.io/", //8
+      "https://xrosisorx.github.io/Stat_2019_East_Asia_and_Oceania/",
+      "https://eveem.github.io/statweb/",
+      "https://chanchai134.github.io/chanchai134.github.io/",
+      "https://fifigith.github.io/stat-group-4/",
+      "https://statgroup5.github.io/Visualization/",
+      "https://operapay.github.io/operapay.github.io/",
+      "https://monthol8th.github.io/01204314-assignment2/",
+      "https://buachonnikan.github.io/buachonnikan.github.io/",
     ]
     function set(id) {
-      console.log(id)
       document.getElementsByTagName("button")[currentId].className = ""
       let btnPrev = document.getElementById("btn-prev")
       let btnNext = document.getElementById("btn-next")
