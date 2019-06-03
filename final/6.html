@@ -1,0 +1,98 @@
+<html>
+
+<head>
+  <title>Stat Final 2019</title>  
+  <style type="text/css">
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #content {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      padding-bottom: 20px;
+    }
+
+    #navigator {
+      position: fixed;
+      z-index: 1;
+      bottom: 0;
+    }
+
+    #btn-prev,
+    #btn-next {
+      background: lightgreen;
+    }
+
+    .active {
+      background: lightcoral;
+    }
+
+    button {
+      max-width: 15vw;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navigator">
+    <button onclick="location.href='./index.html'" type="button" style="background:lightgreen">home</button>
+    <button id="btn-prev" onclick="prev()">previous</button>
+    <span id="navigator-content"></span>
+    <button id="btn-next" onclick="next()">next</button>
+  </div>
+  <div id="content">
+    <iframe id="iframe" width="100%" height="100%" frameborder="0"></iframe>
+  </div>
+  <script>
+    const webs = [
+      { title: "การใช้จ่ายงบประมาณประจำจังหวัดปทุมธานี", url: "https://fewgod.github.io/stat-final-project-visualization/" },
+      { title: "การใช้จ่ายงบประมาณจังหวัดสมุทรปราการ", url: "https://manussanun.github.io"},
+      { title: "การใช้จ่ายงบประมาณจังหวัด นครปฐม", url: "https://tanakanp.github.io/TankanP.github.io/" },
+      { title: "การใช้จ่ายงบประมาณจังหวัด ราชบุรี", url: "https://fifigith.github.io/stat-final/" },
+      { title: "แผนการจัดสรรงบประมาณจำแนกตามกลุ่มจังหวัด", url: "https://xrosisorx.github.io/Stat_2019_Thailand_province_budget/thai_budget.html" },
+    ]
+    const websLength = webs.length
+    const navigatorContent = document.getElementById("navigator-content")
+
+    webs.forEach(({ title, url }, i) => {
+      const button = document.createElement('button')
+      button.onclick = () => set(i)
+      button.innerText = title
+      navigatorContent.appendChild(button)
+    })
+
+    let currentId = Math.floor(Math.random() * webs.length)
+    function set(id) {
+      navigatorContent.getElementsByTagName("button")[currentId].className = ""
+      let btnPrev = document.getElementById("btn-prev")
+      let btnNext = document.getElementById("btn-next")
+      btnPrev.disabled = (id === 0)
+      btnNext.disabled = (id === websLength - 1)
+      document.getElementById("iframe").setAttribute("src", webs[id].url)
+      currentId = id
+      navigatorContent.getElementsByTagName("button")[currentId].className = "active"
+    }
+    function next() {
+      if (currentId === websLength) return
+      set(currentId + 1)
+    }
+    function prev() {
+      if (currentId === 1) return
+      set(currentId - 1)
+    }
+    set(currentId)
+  </script>
+</body>
+
+</html>
